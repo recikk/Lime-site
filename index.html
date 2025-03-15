@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>r3ci</title>
+    
+    <meta name="description" content="Lime gateway, and my bio 🔥">
+    <meta name="keywords" content="discord, lime, lime-spammer, lime-free, limev2, limev2-free, lime-free, discord, r3cik, r3ci">
+    <meta property="og:title" content="Lime gateway">
+    <meta property="og:description" content="Lime gateway, and my bio 🔥">
+    <meta property="og:image" content="assets/avatar.png">
+    <meta property="og:type" content="website">
+    <meta property="theme-color" content="#00ff5e">
+    
+    <link rel="icon" type="image/png" href="assets/avatar.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --card-bg: #101010;
+            --card-bg-hover: #151515;
+            --text-color: #f0f0f0;
+            --secondary-text: #a0a0a0;
+            --primary: #00ff5e;
+            --primary-dark: #00cc4b;
+            --accent: #00c8ff;
+            --gradient-start: #00ff8f;
+            --gradient-end: #00c8ff;
+            --discord-color: #5865F2;
+            --github-color: #ffffff;
+            --telegram-color: #26A5E4;
+            --youtube-color: #FF0000;
+            --soundcloud-color: #FF5500;
+            --border-radius: 16px;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding: 1.5rem 0;
+            position: relative;
+        }
+        
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 50% 50%, rgba(10, 10, 10, 1) 0%, rgba(0, 0, 0, 1) 100%);
+            overflow: hidden;
+        }
+        
+        #stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            transition: transform 0.5s ease-out;
+        }
+        
+        #glows {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            transition: transform 0.5s ease-out;
+        }
+        
+        #nebulas {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            transition: transform 0.5s ease-out;
+        }
+        
+        #shooting-stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        
+        .star {
+            position: absolute;
+            background: #ffffff;
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: starTwinkle 3s infinite ease-in-out;
+        }
+        
+        @keyframes starTwinkle {
+            0%, 100% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        .glow {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 255, 94, 0.15) 0%, rgba(0, 255, 94, 0) 70%);
+            filter: blur(10px);
+            opacity: 0.5;
+            animation: float 15s infinite ease-in-out;
+        }
+        
+        .glow:nth-child(2n) {
+            background: radial-gradient(circle, rgba(0, 200, 255, 0.15) 0%, rgba(0, 200, 255, 0) 70%);
+            animation-delay: -7s;
+        }
+        
+        .glow:nth-child(3n) {
+            background: radial-gradient(circle, rgba(255, 0, 255, 0.1) 0%, rgba(255, 0, 255, 0) 70%);
+            animation-delay: -3s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(50px, 50px); }
+            50% { transform: translate(0, 100px); }
+            75% { transform: translate(-50px, 50px); }
+        }
+        
+        .container {
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .profile-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, 
+                var(--gradient-start), var(--gradient-end), var(--gradient-start));
+            background-size: 200% 100%;
+            animation: gradientMove 8s ease infinite;
+        }
+        
+        @keyframes gradientMove {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 0%; }
+            100% { background-position: 0% 0%; }
+        }
+        
+        .profile-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .avatar-container {
+            position: relative;
+            margin-bottom: 1.2rem;
+        }
+        
+        .avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid transparent;
+            background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end)) border-box;
+            box-shadow: 0 0 25px rgba(0, 200, 255, 0.4);
+            animation: pulseAvatar 4s infinite ease-in-out;
+        }
+        
+        @keyframes pulseAvatar {
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 200, 255, 0.4); }
+            50% { box-shadow: 0 0 40px rgba(0, 255, 143, 0.6); }
+        }
+        
+        .status-dot {
+            width: 22px;
+            height: 22px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            border: 3px solid var(--card-bg);
+            box-shadow: 0 0 10px rgba(0, 255, 94, 0.6);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .username {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+            background-size: 200% auto;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientText 4s linear infinite;
+        }
+        
+        @keyframes gradientText {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+        
+        .discord-status {
+            font-size: 0.95rem;
+            color: var(--secondary-text);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .discord-status::before {
+            content: "•";
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        
+        .section {
+            margin-bottom: 2.5rem;
+        }
+        
+        .section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+            border-radius: 2px;
+        }
+        
+        .link-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .link-card {
+            background-color: rgba(255, 255, 255, 0.03);
+            border-radius: calc(var(--border-radius) - 4px);
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            text-decoration: none;
+            color: var(--text-color);
+            backdrop-filter: blur(5px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .link-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0) 100%);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+        
+        .link-card:hover {
+            background-color: var(--card-bg-hover);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .link-card:hover::before {
+            transform: translateX(100%);
+        }
+        
+        .link-card.highlight {
+            background: linear-gradient(45deg, rgba(0, 200, 255, 0.05), rgba(0, 255, 143, 0.05));
+            border: 1px solid rgba(0, 217, 255, 0.1);
+        }
+        
+        .link-card.highlight:hover {
+            background: linear-gradient(45deg, rgba(0, 200, 255, 0.1), rgba(0, 255, 143, 0.1));
+            box-shadow: 0 10px 25px rgba(0, 217, 255, 0.15);
+        }
+        
+        .card-icon {
+            min-width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            padding: 8px;
+            transition: var(--transition);
+        }
+        
+        .link-card:hover .card-icon {
+            transform: scale(1.1);
+        }
+        
+        .card-text {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        
+        .card-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+        
+        .link-card:hover .card-title {
+            color: var(--primary);
+        }
+        
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .primary-button {
+            display: flex;
+            width: 100%;
+            padding: 1.2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            border-radius: calc(var(--border-radius) - 4px);
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .primary-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0) 100%);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+        
+        .primary-button:hover::before {
+            transform: translateX(100%);
+        }
+        
+        .primary-button:hover {
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .get-free-button {
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-color);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .get-free-button:hover {
+            background: rgba(255, 255, 255, 0.07);
+        }
+        
+        .shop-button {
+            background: linear-gradient(45deg, rgba(0, 200, 255, 0.1), rgba(0, 255, 143, 0.1));
+            color: var(--text-color);
+            border: 1px solid rgba(0, 217, 255, 0.2);
+        }
+        
+        .shop-button:hover {
+            background: linear-gradient(45deg, rgba(0, 200, 255, 0.15), rgba(0, 255, 143, 0.15));
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--secondary-text);
+            font-size: 0.9rem;
+            padding: 0.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .footer a {
+            color: var(--gradient-start);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer a:hover {
+            color: var(--gradient-end);
+        }
+        
+        .heart {
+            color: #ff3c78;
+            display: inline-block;
+            animation: heartbeat 1.5s infinite;
+        }
+        
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 3px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--gradient-start), var(--gradient-end));
+            border-radius: 3px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(var(--gradient-end), var(--gradient-start));
+        }
+        
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100px;
+            width: 100%;
+        }
+        
+        .loading-dot {
+            width: 8px;
+            height: 8px;
+            margin: 0 5px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            animation: loadingDot 1.5s infinite ease-in-out;
+        }
+        
+        .loading-dot:nth-child(2) {
+            animation-delay: 0.2s;
+            background-color: var(--accent);
+        }
+        
+        .loading-dot:nth-child(3) {
+            animation-delay: 0.4s;
+            background-color: var(--primary);
+        }
+        
+        @keyframes loadingDot {
+            0%, 100% { transform: scale(0.5); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 1; }
+        }
+        
+        @media (max-width: 600px) {
+            .profile-card {
+                padding: 1.8rem;
+            }
+            
+            .link-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .username {
+                font-size: 1.8rem;
+            }
+            
+            .avatar {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .section-title {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 350px) {
+            .profile-card {
+                padding: 1.5rem;
+            }
+            
+            .username {
+                font-size: 1.6rem;
+            }
+            
+            .avatar {
+                width: 90px;
+                height: 90px;
+            }
+        }
+        
+        .shooting-star {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,1) 50%, rgba(255,255,255,0));
+            opacity: 0;
+            z-index: 2;
+            pointer-events: none;
+        }
+        
+        @keyframes shootingStar {
+            0% {
+                transform: translateX(-100px) translateY(100px) rotate(45deg);
+                opacity: 0;
+            }
+            10%, 15% {
+                opacity: 1;
+            }
+            30% {
+                transform: translateX(calc(100vw + 200px)) translateY(calc(-100vh - 200px)) rotate(45deg);
+                opacity: 0;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+        
+        .nebula {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.1;
+            animation: nebulaFloat 30s infinite ease-in-out;
+            pointer-events: none;
+        }
+        
+        @keyframes nebulaFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(100px, 100px) scale(1.1); }
+            50% { transform: translate(50px, 200px) scale(0.9); }
+            75% { transform: translate(-100px, 100px) scale(1.2); }
+        }
+    </style>
+</head>
+<body>
+    <div class="background" id="background">
+        <div id="stars"></div>
+        <div id="glows"></div>
+        <div id="nebulas"></div>
+        <div id="shooting-stars"></div>
+    </div>
+    
+    <div class="container">
+        <div class="profile-card">
+            <div class="profile-header">
+                <div class="avatar-container">
+                    <img class="avatar" src="assets/avatar.png" alt="r3ci profile">
+                    <div class="status-dot"></div>
+                </div>
+                <h1 class="username">r3ci</h1>
+                <p class="discord-status" id="discord-status">Playing Code • In lime-v2 - debugging...</p>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Connect With Me</h2>
+                <div id="social-links" class="link-cards">
+                    <a href="https://discord.com/users/1326906424873193586" class="link-card highlight" target="_blank" rel="noopener noreferrer">
+                        <div class="card-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
+                                <path d="M14.82 4.26a10.14 10.14 0 0 0-.53 1.1 14.66 14.66 0 0 0-4.58 0 10.14 10.14 0 0 0-.53-1.1 16 16 0 0 0-4.13 1.3 17.33 17.33 0 0 0-3 11.59 16.6 16.6 0 0 0 5.07 2.59A12.89 12.89 0 0 0 8.23 18a9.65 9.65 0 0 1-1.71-.83 3.39 3.39 0 0 0 .42-.33 11.66 11.66 0 0 0 10.12 0q.21.18.42.33a10.84 10.84 0 0 1-1.71.83 12.41 12.41 0 0 0 1.08 1.78 16.44 16.44 0 0 0 5.06-2.59 17.22 17.22 0 0 0-3-11.59 16.09 16.09 0 0 0-4.09-1.35zM8.68 14.81a1.94 1.94 0 0 1-1.8-2 1.93 1.93 0 0 1 1.8-2 1.93 1.93 0 0 1 1.8 2 1.94 1.94 0 0 1-1.8 2zm6.64 0a1.94 1.94 0 0 1-1.8-2 1.93 1.93 0 0 1 1.8-2 1.92 1.92 0 0 1 1.8 2 1.93 1.93 0 0 1-1.8 2z" fill="#5865F2"/>
+                            </svg>
+                        </div>
+                        <div class="card-text">
+                            <span class="card-title">Discord</span>
+                        </div>
+                    </a>
+                    
+                    <a href="https://github.com/r3ci-gg" class="link-card highlight" target="_blank" rel="noopener noreferrer">
+                        <div class="card-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
+                                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" fill="#ffffff"/>
+                            </svg>
+                        </div>
+                        <div class="card-text">
+                            <span class="card-title">GitHub</span>
+                        </div>
+                    </a>
+                    
+                    <a href="https://youtube.com/@r3cik" class="link-card" target="_blank" rel="noopener noreferrer">
+                        <div class="card-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="#FF0000"/>
+                            </svg>
+                        </div>
+                        <div class="card-text">
+                            <span class="card-title">YouTube</span>
+                        </div>
+                    </a>
+                    
+                    <a href="https://soundcloud.com/extivero" class="link-card" target="_blank" rel="noopener noreferrer">
+                        <div class="card-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
+                                <path d="M12 0C5.373 0 0 5.373 0 12c0 6.627 5.373 12 12 12 6.628 0 12-5.373 12-12 0-6.627-5.372-12-12-12" fill="#FF5500"/>
+                            </svg>
+                        </div>
+                        <div class="card-text">
+                            <span class="card-title">SoundCloud</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Lime Gateway</h2>
+                <div id="lime-links" class="link-cards">
+                    <a href="https://t.me/limespammer" class="link-card highlight" target="_blank" rel="noopener noreferrer">
+                        <div class="card-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
+                                <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.96 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" fill="#26A5E4"/>
+                            </svg>
+                        </div>
+                        <div class="card-text">
+                            <span class="card-title">Lime Channel</span>
+                        </div>
+                    </a>
+                    
+                    <a href="https://discord.gg/spamming" class="link-card highlight" target="_blank" rel="noopener noreferrer">
+                        <div class="card-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
+                                <path d="M14.82 4.26a10.14 10.14 0 0 0-.53 1.1 14.66 14.66 0 0 0-4.58 0 10.14 10.14 0 0 0-.53-1.1 16 16 0 0 0-4.13 1.3 17.33 17.33 0 0 0-3 11.59 16.6 16.6 0 0 0 5.07 2.59A12.89 12.89 0 0 0 8.23 18a9.65 9.65 0 0 1-1.71-.83 3.39 3.39 0 0 0 .42-.33 11.66 11.66 0 0 0 10.12 0q.21.18.42.33a10.84 10.84 0 0 1-1.71.83 12.41 12.41 0 0 0 1.08 1.78 16.44 16.44 0 0 0 5.06-2.59 17.22 17.22 0 0 0-3-11.59 16.09 16.09 0 0 0-4.09-1.35zM8.68 14.81a1.94 1.94 0 0 1-1.8-2 1.93 1.93 0 0 1 1.8-2 1.93 1.93 0 0 1 1.8 2 1.94 1.94 0 0 1-1.8 2zm6.64 0a1.94 1.94 0 0 1-1.8-2 1.93 1.93 0 0 1 1.8-2 1.92 1.92 0 0 1 1.8 2 1.93 1.93 0 0 1-1.8 2z" fill="#5865F2"/>
+                            </svg>
+                        </div>
+                        <div class="card-text">
+                            <span class="card-title">Lime Server</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        
+            <div class="button-container">
+                <a id="free-version-link" href="https://github.com/r3ci-gg/Lime-spammer" class="primary-button get-free-button" target="_blank" rel="noopener noreferrer">
+                    Get Free Version
+                </a>
+                <a id="shop-link" href="https://r3ci.sellhub.cx/" class="primary-button shop-button" target="_blank" rel="noopener noreferrer">
+                    Shop / Buy Lime
+                </a>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Made with <span class="heart">❤️</span> in <span id="current-year">2025</span></p>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const stars = document.getElementById('stars');
+            const glows = document.getElementById('glows');
+            const nebulas = document.getElementById('nebulas');
+            const shootingStars = document.getElementById('shooting-stars');
+            const discordStatus = document.getElementById('discord-status');
+            
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+            
+            stars.innerHTML = '';
+            glows.innerHTML = '';
+            nebulas.innerHTML = '';
+            shootingStars.innerHTML = '';
+            
+            for (let i = 0; i < 200; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                const size = Math.random() * 2 + 1;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.animationDelay = `${Math.random() * 3}s`;
+                
+                stars.appendChild(star);
+            }
+            
+            for (let i = 0; i < 8; i++) {
+                const glow = document.createElement('div');
+                glow.className = 'glow';
+                glow.style.left = `${Math.random() * 80 + 10}%`;
+                glow.style.top = `${Math.random() * 80 + 10}%`;
+                glow.style.animationDelay = `${Math.random() * 10}s`;
+                
+                glows.appendChild(glow);
+            }
+            
+            for (let i = 0; i < 10; i++) {
+                const nebula = document.createElement('div');
+                nebula.className = 'nebula';
+                nebula.style.left = `${Math.random() * 80 + 10}%`;
+                nebula.style.top = `${Math.random() * 80 + 10}%`;
+                nebula.style.animationDelay = `${Math.random() * 10}s`;
+                
+                const hue1 = Math.floor(Math.random() * 360);
+                const hue2 = (hue1 + 180) % 360;
+                nebula.style.background = `radial-gradient(circle, 
+                    hsla(${hue1}, 100%, 70%, 0.1) 0%, 
+                    hsla(${hue2}, 100%, 70%, 0.08) 40%, 
+                    rgba(255, 255, 255, 0.05) 70%, 
+                    rgba(0, 0, 0, 0) 100%)`;
+                
+                nebulas.appendChild(nebula);
+            }
+            
+            function createShootingStar() {
+                const shootingStar = document.createElement('div');
+                shootingStar.className = 'shooting-star';
+                
+                const width = Math.random() * 150 + 100;
+                shootingStar.style.width = `${width}px`;
+                
+                const startX = Math.random() * window.innerWidth;
+                const startY = Math.random() * (window.innerHeight / 2);
+                shootingStar.style.left = `${startX}px`;
+                shootingStar.style.top = `${startY}px`;
+                
+                const angle = Math.random() * 60 - 30 + 45;
+                shootingStar.style.transform = `rotate(${angle}deg)`;
+                
+                const duration = Math.random() * 2 + 2;
+                shootingStar.style.animation = `shootingStar ${duration}s linear forwards`;
+                
+                shootingStars.appendChild(shootingStar);
+                
+                setTimeout(() => {
+                    if (shootingStar.parentNode === shootingStars) {
+                        shootingStars.removeChild(shootingStar);
+                    }
+                }, duration * 1000);
+            }
+            
+            for (let i = 0; i < 2; i++) {
+                setTimeout(() => createShootingStar(), Math.random() * 2000);
+            }
+            
+            setInterval(createShootingStar, 3000);
+            
+            const statusMessages = [
+                "Playing Code • In lime - 99999 bugs found",
+                "Playing Code • In lime - code is fucked",
+                "Playing Code • Deleting VS CODE",
+                "Playing Code • Breaking Discord TOS",
+                "Playing Code • Waiting for Windows 11 to crash",
+                "Playing Code • Rewriting in Rust",
+                "Playing Code • pip install life",
+                "Playing Code • git commit -m 'fix bugs' --force",
+                "Playing Code • Blaming chat gpt",
+                "Playing Code • Loading a gun",
+                "Playing Code • Making AI hallucinate",
+                "Playing Code • Fixing a bug",
+                "Playing Code • While(true) { fixBugs(); createBugs(); }",
+                "Playing Code • In lime - it works on my machine tho",
+                "Playing Code • 404 Not Found",
+                "Playing Code • 404 Sleep Not Found",
+                "Playing Code • Undefined is not a function",
+                "Playing Code • Playing with femboy thigs",
+                "Playing Code • rm -rf / --no-preserve-root"
+            ];
+            
+            function updateStatusMessage() {
+                const randomIndex = Math.floor(Math.random() * statusMessages.length);
+                discordStatus.textContent = statusMessages[randomIndex];
+            }
+            
+            setInterval(updateStatusMessage, 4000);
+            updateStatusMessage();
+            
+            document.addEventListener('mousemove', function(e) {
+                const moveX = (e.clientX / window.innerWidth - 0.5) * 20;
+                const moveY = (e.clientY / window.innerHeight - 0.5) * 20;
+                
+                requestAnimationFrame(() => {
+                    stars.style.transform = `translateX(${moveX}px) translateY(${moveY}px)`;
+                    glows.style.transform = `translateX(${moveX * 1.5}px) translateY(${moveY * 1.5}px)`;
+                    nebulas.style.transform = `translateX(${moveX * 1.2}px) translateY(${moveY * 1.2}px)`;
+                });
+            });
+        });
+    </script>
+</body>
+</html>
